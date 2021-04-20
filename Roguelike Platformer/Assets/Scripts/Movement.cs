@@ -20,6 +20,7 @@ public class Movement : MonoBehaviour
     private Rigidbody2D _rigidbody;
 
     private bool _isFlipRight;
+
     private void Start()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -33,6 +34,7 @@ public class Movement : MonoBehaviour
         MoveLogic();
         Flip();
         Attack();
+        ExtraAttack();
     }
 
     private void MoveLogic()
@@ -59,6 +61,7 @@ public class Movement : MonoBehaviour
 
     private void JumpLogic()
     {
+        //todo прыжок перед касанием
         if (Input.GetButtonDown("Jump") && _isGrounded)
         {
             _rigidbody.AddForce(transform.up * jumpForce, ForceMode2D.Impulse);
@@ -74,6 +77,14 @@ public class Movement : MonoBehaviour
         {
             _animator.SetBool("isAttacking", true);
             Debug.Log("down");
+        }
+    }
+
+    private void ExtraAttack()
+    {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            _animator.Play("ExtraAttack");
         }
     }
 }
